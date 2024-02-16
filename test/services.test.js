@@ -32,4 +32,31 @@ describe("Event Service",()=> {
         let eventService = new EventService(new EventRepository());
         expect(eventService.getEvents().length).toBe(3);
     })
+
+    test('getEvents return all events', async () => {
+        let eventService = new EventService(new EventRepository());
+        expect(eventService.getEvents()).toEqual(fakeEvents);
+    })
+
+
+    test('get the first event', async () => {
+        let eventService = new EventService(new EventRepository());
+        expect(eventService.getFirstEvent()).toEqual(fakeEvents[1]);
+    })
+
+    test('get the last event', async () => {
+        let eventService = new EventService(new EventRepository());
+        expect(eventService.getLastEvent()).toEqual(fakeEvents[2]);
+    })
+
+
+    test('get the longest event', async () => {
+        let eventService = new EventService(new EventRepository());
+        expect(eventService.getLongestEvent()).toEqual(fakeEvents[0]);
+    })
+
+    test('get the shortest event', async () => {
+        let eventService = new EventService(new EventRepository());
+        expect(eventService.getShortestEvent()).toEqual(fakeEvents[2]);
+    })
 });

@@ -2,6 +2,12 @@
 import EventRepository from "./repository";
 import Event from "./models";
 
+let myEvents = [
+    new Event(new Date('2019-12-17T03:24:00'),new Date('2019-12-17T13:24:00'),"Hello World","Campus Numerique","This is an hello world.."),
+    new Event(new Date('2018-12-17T03:24:00'),new Date('1995-12-17T03:24:00'),"First event","Campus Numerique","This is an hello world.."),
+    new Event(new Date('2020-04-01T09:00:00'),new Date('2020-04-01T17:00:00'),"Unit test againt","Campus Numerique","This is an hello world..")
+];
+
 export default class EventService {
 
     /**
@@ -31,7 +37,15 @@ export default class EventService {
      * @return {null | Event}
      */
     getFirstEvent() {
-        return null; //TODO
+        let firstEvent = myEvents[0];
+        for(let i = 1; i < myEvents.length; i++)
+        {
+            if(firstEvent["startTime"] > myEvents[i]["startTime"])
+            {
+                firstEvent = myEvents[i];
+            }
+        }
+        return firstEvent;
     }
 
     /**
@@ -39,7 +53,15 @@ export default class EventService {
      * @return {null | Event}
      */
     getLastEvent() {
-        return null; //TODO
+        let lastEvent = myEvents[0];
+        for(let i = 1; i < myEvents.length; i++)
+        {
+            if(lastEvent["startTime"] < myEvents[i]["startTime"])
+            {
+                lastEvent = myEvents[i];
+            }
+        }
+        return lastEvent;
     }
 
     /**
@@ -47,7 +69,18 @@ export default class EventService {
      * @return {null | Event}
      */
     getLongestEvent() {
-        return null; //TODO
+        let longestEvent = myEvents[0];
+        for(let i = 1; i < myEvents.length; i++)
+        {
+            if(myEvents[i]["endTime"] > myEvents[i]["startTime"])
+            {
+                if(longestEvent["endTime"] - longestEvent["startTime"] < myEvents[i]["endTime"] - myEvents[i]["startTime"])
+                {
+                    longestEvent = myEvents[i];
+                }
+            }
+        }
+        return longestEvent;
     }
 
     /**
@@ -55,7 +88,18 @@ export default class EventService {
      * @return {null | Event}
      */
     getShortestEvent() {
-        return null; //TODO
+        let shortestEvent = myEvents[0];
+        for(let i = 1; i < myEvents.length; i++)
+        {
+            if(myEvents[i]["endTime"] > myEvents[i]["startTime"])
+            {
+                if(shortestEvent["endTime"] - shortestEvent["startTime"] > myEvents[i]["endTime"] - myEvents[i]["startTime"])
+                {
+                    shortestEvent = myEvents[i];
+                }
+            }
+        }
+        return shortestEvent;
     }
 
     // A implementer en TDD

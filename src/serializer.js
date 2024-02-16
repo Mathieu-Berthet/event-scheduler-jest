@@ -7,6 +7,7 @@ export default class EventSerializer {
      * @return {string}
      */
     serialize(event){
+        //console.log("event avant transfo : ", event);
         return JSON.stringify(event);
     }
 
@@ -16,6 +17,10 @@ export default class EventSerializer {
      * @param {string} event
      */
     unserialize(event){
-        return []; //TODO
+        let eventUnserialize = JSON.parse(event);
+        let myEvent = new Event(eventUnserialize["startTime"], eventUnserialize["endTime"], eventUnserialize["title"], eventUnserialize["location"], eventUnserialize["description"]);
+        /*console.log("unserialized : ", eventUnserialize);
+        console.log("the event : ", myEvent);*/
+        return myEvent;
     }
 }
